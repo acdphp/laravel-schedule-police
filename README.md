@@ -30,7 +30,7 @@ Use this if you need to:
 ## Config
 You may override the config by publishing it.
 ```shell
-php artisan vendor:publish --provider="Acdphp\ScheduleControl\ServiceProvider"
+php artisan vendor:publish --provider="Acdphp\ScheduleControl\ScheduleControlServiceProvider"
 ```
 
 You may also just define environment variables if you don't need to publish the config.

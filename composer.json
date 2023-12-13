@@ -21,7 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ScheduleControlServiceProvider"
+                "Acdphp\\ScheduleControl\\ScheduleControlServiceProvider"
             ]
         }
     },
