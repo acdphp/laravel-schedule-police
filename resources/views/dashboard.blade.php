@@ -71,11 +71,12 @@
                 @endif
             </div>
             @else
-                <p>
-                    Not properly configured. Make sure to:
-                    - extend <i>ControlledConsoleKernel</i> in your <i>\App\Console\Kernel</i>.
-                    - migrate: <i>php artisan migrate</i>.
-                </p>
+                <div>
+                    <strong>Not properly configured! Make sure to:</strong>
+                    <ul>
+                        <li>extend <i>ControlledConsoleKernel</i> in your <i>\App\Console\Kernel</i>.</li>
+                        <li> migrate: <i>php artisan migrate</i>.</li>
+                    </ul>
             @endif
         </div>
     </body>
