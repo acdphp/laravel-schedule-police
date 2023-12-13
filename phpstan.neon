@@ -1,0 +1,35 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/ekino/phpstan-banned-code/extension.neon
+
+parameters:
+    checkModelProperties: true
+    paths:
+        - src
+    level: 6
+    checkMissingIterableValueType: false
+    reportUnmatchedIgnoredErrors: false
+    checkGenericClassInNonGenericObjectType: false
+    banned_code:
+        nodes:
+            - { type: Stmt_Echo, functions: null }
+            - { type: Expr_Eval, functions: null }
+            - { type: Expr_Exit, functions: null }
+            - { type: Expr_Print, functions: null }
+            -
+                type: Expr_FuncCall
+                functions:
+                    - dd
+                    - ddd
+                    - debug_backtrace
+                    - dump
+                    - exec
+                    - passthru
+                    - phpinfo
+                    - print_r
+                    - proc_open
+                    - shell_exec
+                    - system
+                    - var_dump
+                    - print
+        use_from_tests: false
