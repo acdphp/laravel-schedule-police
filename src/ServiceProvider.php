@@ -4,7 +4,7 @@ namespace Acdphp\ScheduleControl;
 
 use Illuminate\Support\ServiceProvider;
 
-class ScheduleControlServiceProvider extends ServiceProvider
+class ServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
