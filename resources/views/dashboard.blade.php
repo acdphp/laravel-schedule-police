@@ -64,8 +64,10 @@
                             </div>
                         </form>
                         <hr/>
-                        @if (session('commandOutput'))
-                            {!! nl2br(session('commandOutput')) !!}
+                        @if (session('commandOutputMessage'))
+                            <div class="{{ session('commandOutputIsError') === true ? 'text-danger': '' }}">
+                                {!! nl2br(session('commandOutputMessage')) !!}
+                            </div>
                         @endif
                     </div>
                 @endif

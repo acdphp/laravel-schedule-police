@@ -3,6 +3,7 @@
 namespace Acdphp\ScheduleControl\Services;
 
 use Acdphp\ScheduleControl\Console\Kernel as ControlKernel;
+use Acdphp\ScheduleControl\Dtos\ExecResultDto;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Console\Kernel;
@@ -72,19 +73,28 @@ class ScheduleControlService
             ->delete();
     }
 
-    public function execCommand(string $command): string
+    public function execCommand(string $command): ExecResultDto
     {
         if (Str::startsWith($command, $this->config['blacklisted_commands'])) {
-            return 'Error: Cannot run this command in dashboard because it\'s blacklisted. Update the blacklist in the config.';
+            return new ExecResultDto(
+                'Cannot run this command in dashboard because it\'s blacklisted.',
+                true
+            );
         }
 
         try {
-            Artisan::call($command);
+            $exitCode = Artisan::call($command);
         } catch (\Throwable $e) {
-            return 'Error: ' . $e->getMessage();
+            return new ExecResultDto(
+                $e->getMessage(),
+                true
+            );
         }
 
-        return Artisan::output();
+        return new ExecResultDto(
+            Artisan::output(),
+            $exitCode !== 0
+        );
     }
 
     public function eventStoppedAt(Event $event): ?Carbon

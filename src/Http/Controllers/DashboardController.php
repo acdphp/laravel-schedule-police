@@ -50,7 +50,8 @@ class DashboardController extends Controller
 
         return Redirect::back()->with([
             'command' => $command,
-            'commandOutput' => $output,
+            'commandOutputIsError' => $output->isError,
+            'commandOutputMessage' => $output->message,
         ]);
     }
 }
