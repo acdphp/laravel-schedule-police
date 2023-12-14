@@ -2,9 +2,10 @@
 
 namespace Acdphp\ScheduleControl\Services;
 
-use Acdphp\ScheduleControl\Console\Kernel;
+use Acdphp\ScheduleControl\Console\Kernel as ControlKernel;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -28,7 +29,7 @@ class ScheduleControlService
     public function isConfigured(): bool
     {
         return
-            is_a('\App\Console\Kernel', Kernel::class, true) &&
+            is_a('\App\Console\Kernel', ControlKernel::class, true) &&
             Schema::hasTable(self::DB_TABLE);
     }
 
@@ -73,7 +74,7 @@ class ScheduleControlService
 
     public function execCommand(string $command): string
     {
-        if (Str::startsWith($command, $this->config['blacklist_commands'])) {
+        if (Str::startsWith($command, $this->config['blacklisted_commands'])) {
             return 'Error: Cannot run this command in dashboard because it\'s blacklisted. Update the blacklist in the config.';
         }
 

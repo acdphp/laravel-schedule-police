@@ -53,7 +53,7 @@
                     </table>
                 </div>
 
-                @if($enableExecute && $event->is_console)
+                @if($enableExecute)
                     <div class="col-4">
                         <form method="post" action="{{ route('schedule-control.exec') }}">
                             @csrf
