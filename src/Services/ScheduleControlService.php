@@ -53,7 +53,7 @@ class ScheduleControlService
         }, $schedule->events());
 
         // Sort tasks by stopped time
-        if ($this->config('sort_by_stopped')) {
+        if ($this->config['sort_by_stopped']) {
             usort($tasks, static function($a, $b) {
                 return $a->stoppedEvent?->created_at < $b->stoppedEvent?->created_at;
             });
@@ -86,8 +86,8 @@ class ScheduleControlService
     {
         if (Str::startsWith($command, $this->config['blacklisted_commands'])) {
             return new ExecResult(
-                'Cannot run this command in dashboard because it\'s blacklisted.',
-                true
+                message: 'Cannot run this command in dashboard because it\'s blacklisted.',
+                isError: true
             );
         }
 
@@ -95,14 +95,14 @@ class ScheduleControlService
             $exitCode = Artisan::call($command);
         } catch (Throwable $e) {
             return new ExecResult(
-                $e->getMessage(),
-                true
+                message: $e->getMessage(),
+                isError: true
             );
         }
 
         return new ExecResult(
-            Artisan::output(),
-            $exitCode !== 0
+            message: Artisan::output(),
+            isError: $exitCode !== 0
         );
     }
 
@@ -124,10 +124,5 @@ class ScheduleControlService
             ->after('artisan\'')
             ->whenEmpty(fn () => Str::of($event->description))
             ->trim();
-    }
-
-    protected function isEventConsoleCommand(Event $event): bool
-    {
-        return preg_match("/^'.*php.*' 'artisan' /", $event->command);
     }
 }
