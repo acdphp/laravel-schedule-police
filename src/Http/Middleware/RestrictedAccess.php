@@ -1,6 +1,6 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Http\Middleware;
+namespace Acdphp\SchedulePolice\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Gate;
@@ -13,7 +13,7 @@ class RestrictedAccess
             return $next($request);
         }
 
-        if (Gate::allows('viewScheduleControl')) {
+        if (Gate::allows('viewSchedulePolice')) {
             return $next($request);
         }
 

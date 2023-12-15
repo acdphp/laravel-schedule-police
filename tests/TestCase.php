@@ -1,8 +1,8 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Tests;
+namespace Acdphp\SchedulePolice\Tests;
 
-use Acdphp\ScheduleControl\ScheduleControlServiceProvider;
+use Acdphp\SchedulePolice\SchedulePoliceServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -10,7 +10,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ScheduleControlServiceProvider::class,
+            SchedulePoliceServiceProvider::class,
         ];
     }
 }

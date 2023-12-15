@@ -1,11 +1,11 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Services;
+namespace Acdphp\SchedulePolice\Services;
 
-use Acdphp\ScheduleControl\Console\Kernel as ControlKernel;
-use Acdphp\ScheduleControl\Data\ExecResult;
-use Acdphp\ScheduleControl\Data\ScheduledEvent;
-use Acdphp\ScheduleControl\Models\StoppedScheduledEvent;
+use Acdphp\SchedulePolice\Console\Kernel as ControlKernel;
+use Acdphp\SchedulePolice\Data\ExecResult;
+use Acdphp\SchedulePolice\Data\ScheduledEvent;
+use Acdphp\SchedulePolice\Models\StoppedScheduledEvent;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Console\Kernel;
@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Throwable;
 
-class ScheduleControlService
+class SchedulePoliceService
 {
     protected static ?Collection $stoppedEventsCache = null;
     protected array $config;
 
     public function __construct()
     {
-        $this->config = config('schedule-control');
+        $this->config = config('schedule-police');
     }
 
     public function isConfigured(): bool

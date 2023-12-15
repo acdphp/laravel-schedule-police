@@ -1,8 +1,8 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Console;
+namespace Acdphp\SchedulePolice\Console;
 
-use Acdphp\ScheduleControl\Console\Scheduling\Schedule as ControlledSchedule;
+use Acdphp\SchedulePolice\Console\Scheduling\Schedule as ControlledSchedule;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

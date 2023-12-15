@@ -1,6 +1,6 @@
 <?php
 
-use Acdphp\ScheduleControl\Http\Middleware\RestrictedAccess;
+use Acdphp\SchedulePolice\Http\Middleware\RestrictedAccess;
 
 return [
     /*
@@ -11,7 +11,7 @@ return [
     | Use this when you need to add prefix to the routes.
     |
     */
-    'url_prefix' => env('SCHEDULE_CONTROL_URL_PREFIX', ''),
+    'url_prefix' => env('SCHEDULE_POLICE_URL_PREFIX', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     | Disable command execution from the dashboard.
     |
     */
-    'enable_execution' => env('SCHEDULE_CONTROL_ALLOW_EXECUTE_CMD', true),
+    'enable_execution' => env('SCHEDULE_POLICE_ALLOW_EXECUTE_CMD', true),
 
     /*
     |--------------------------------------------------------------------------

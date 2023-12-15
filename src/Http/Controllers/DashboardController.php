@@ -1,10 +1,10 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Http\Controllers;
+namespace Acdphp\SchedulePolice\Http\Controllers;
 
-use Acdphp\ScheduleControl\Http\Requests\ControlRequest;
-use Acdphp\ScheduleControl\Http\Requests\ExecRequest;
-use Acdphp\ScheduleControl\Services\ScheduleControlService;
+use Acdphp\SchedulePolice\Http\Requests\ControlRequest;
+use Acdphp\SchedulePolice\Http\Requests\ExecRequest;
+use Acdphp\SchedulePolice\Services\SchedulePoliceService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
-    public function __construct(protected ScheduleControlService $service)
+    public function __construct(protected SchedulePoliceService $service)
     {
     }
 
@@ -23,39 +23,39 @@ class DashboardController extends Controller
     public function index(): View
     {
         if ($this->service->isConfigured()) {
-            return view('schedule-control::dashboard', [
+            return view('schedule-police::dashboard', [
                 'events' => $this->service->getScheduledEvents(),
-                'enableExecute' => config('schedule-control.enable_execution'),
+                'enableExecute' => config('schedule-police.enable_execution'),
             ]);
         }
 
-        return view('schedule-control::unconfigured');
+        return view('schedule-police::unconfigured');
     }
 
     public function stop(ControlRequest $request): RedirectResponse
     {
         $this->service->stopScheduleByKey(...$request->validated());
 
-        return Redirect::route('schedule-control.index');
+        return Redirect::route('schedule-police.index');
     }
 
     public function start(ControlRequest $request): RedirectResponse
     {
         $this->service->startScheduleByKey(...$request->validated());
 
-        return Redirect::route('schedule-control.index');
+        return Redirect::route('schedule-police.index');
     }
 
     public function exec(ExecRequest $request): RedirectResponse
     {
-        if (! config('schedule-control.enable_execution')) {
+        if (! config('schedule-police.enable_execution')) {
             abort(403);
         }
 
         $command = $request->validated('command');
         $output = $this->service->execCommand($command);
 
-        return Redirect::route('schedule-control.index')
+        return Redirect::route('schedule-police.index')
             ->withFragment('#v-execute')
             ->with([
                 'command' => $command,

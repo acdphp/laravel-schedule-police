@@ -1,5 +1,5 @@
-# Laravel Schedule Control
-[![Latest Stable Version](https://poser.pugx.org/acdphp/laravel-schedule-control/v)](https://packagist.org/packages/acdphp/laravel-schedule-control)
+# Laravel Schedule Police
+[![Latest Stable Version](https://poser.pugx.org/acdphp/laravel-schedule-police/v)](https://packagist.org/packages/acdphp/laravel-schedule-police)
 
 Use this if you need to:
 - :white_check_mark: Stop and start scheduled commands without redeploying.
@@ -9,7 +9,7 @@ Use this if you need to:
 ## Installation
 1. Install the package
     ```shell
-    composer require acdphp/laravel-schedule-control
+    composer require acdphp/laravel-schedule-police
     ```
 
 2. Run the migration.
@@ -19,14 +19,14 @@ Use this if you need to:
    
 3. Publish assets
    ```shell
-   php artisan vendor:publish --tag=schedule-control-assets --force
+   php artisan vendor:publish --tag=schedule-police-assets --force
    ```
 
-4. Update your Console Kernel to extend `Acdphp\ScheduleControl\Console\Kernel` instead of `Illuminate\Foundation\Console\Kernel`.
+4. Update your Console Kernel to extend `Acdphp\SchedulePolice\Console\Kernel` instead of `Illuminate\Foundation\Console\Kernel`.
     ```php
     namespace App\Console;
     
-    use Acdphp\ScheduleControl\Console\Kernel as ConsoleKernel;
+    use Acdphp\SchedulePolice\Console\Kernel as ConsoleKernel;
     
     class Kernel extends ConsoleKernel
     ...
@@ -35,30 +35,30 @@ Use this if you need to:
 ## Config
 You may override the config by publishing it.
 ```shell
-php artisan vendor:publish --tag=schedule-control-config
+php artisan vendor:publish --tag=schedule-police-config
 ```
 
 You may also just define environment variables if you don't need to publish the config.
 - Disable command execution in the dashboard.
 ```dotenv
-SCHEDULE_CONTROL_ALLOW_EXECUTE_CMD=false
+SCHEDULE_POLICE_ALLOW_EXECUTE_CMD=false
 ```
 
 - Add prefix to routes.
 ```dotenv
-SCHEDULE_CONTROL_URL_PREFIX=your-prefix
+SCHEDULE_POLICE_URL_PREFIX=your-prefix
 ```
 
 ## Dashboard
-After installation, you may access the dashboard via the `/schedule-control` route.
+After installation, you may access the dashboard via the `/schedule-police` route.
 
 ### Authorization
-By default, you will only be able to access this dashboard in the local environment. However, you may specify authorization for non-local environments by defining `viewScheduleControl` gate, typically within the `boot` method of the `App\Providers\AuthServiceProvider` class.
+By default, you will only be able to access this dashboard in the local environment. However, you may specify authorization for non-local environments by defining `viewSchedulePolice` gate, typically within the `boot` method of the `App\Providers\AuthServiceProvider` class.
 
 ```php
 public function boot(): void
 {
-    Gate::define('viewScheduleControl', function (User $user) {
+    Gate::define('viewSchedulePolice', function (User $user) {
         // return true or false
     });
 }

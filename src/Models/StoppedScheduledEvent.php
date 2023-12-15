@@ -1,6 +1,6 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Models;
+namespace Acdphp\SchedulePolice\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;

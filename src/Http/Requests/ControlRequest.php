@@ -1,6 +1,6 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Http\Requests;
+namespace Acdphp\SchedulePolice\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

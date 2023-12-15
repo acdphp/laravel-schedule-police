@@ -1,8 +1,8 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Console\Scheduling;
+namespace Acdphp\SchedulePolice\Console\Scheduling;
 
-use Acdphp\ScheduleControl\Services\ScheduleControlService;
+use Acdphp\SchedulePolice\Services\SchedulePoliceService;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule as IlluminateSchedule;
 
@@ -14,9 +14,9 @@ class Schedule extends IlluminateSchedule
     public function dueEvents($app)
     {
         /**
-         * @var ScheduleControlService $service
+         * @var SchedulePoliceService $service
          */
-        $service = app(ScheduleControlService::class);
+        $service = app(SchedulePoliceService::class);
 
         return parent::dueEvents($app)->filter(function (Event $event) use ($service) {
             return ! $service->stoppedEvent($event);

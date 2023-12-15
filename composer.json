@@ -1,5 +1,5 @@
 {
-    "name": "acdphp/laravel-schedule-control",
+    "name": "acdphp/laravel-schedule-police",
     "description": "Stop, start or execute scheduled commands from a simple dashboard without redeploying, while maintaining the visibility, control, and reviewability of the configurations in your codebase.",
     "type": "library",
     "license": "MIT",
@@ -24,14 +24,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Acdphp\\ScheduleControl\\": "src",
-            "Acdphp\\ScheduleControl\\Tests\\": "tests"
+            "Acdphp\\SchedulePolice\\": "src",
+            "Acdphp\\SchedulePolice\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Acdphp\\ScheduleControl\\ScheduleControlServiceProvider"
+                "Acdphp\\SchedulePolice\\SchedulePoliceServiceProvider"
             ]
         }
     },

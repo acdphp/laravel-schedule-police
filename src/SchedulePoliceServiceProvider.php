@@ -1,15 +1,15 @@
 <?php
 
-namespace Acdphp\ScheduleControl;
+namespace Acdphp\SchedulePolice;
 
 use Illuminate\Support\ServiceProvider;
 
-class ScheduleControlServiceProvider extends ServiceProvider
+class SchedulePoliceServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         // Config merge
-        $this->mergeConfigFrom(__DIR__ . '/../config/schedule-control.php', 'schedule-control');
+        $this->mergeConfigFrom(__DIR__ . '/../config/schedule-police.php', 'schedule-police');
     }
 
     public function boot(): void
@@ -24,7 +24,7 @@ class ScheduleControlServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         // Views
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'schedule-control');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'schedule-police');
 
         // Routes
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -34,12 +34,12 @@ class ScheduleControlServiceProvider extends ServiceProvider
     {
         // Config
         $this->publishes([
-            __DIR__ . '/../config/schedule-control.php' => config_path('schedule-control.php'),
-        ], 'schedule-control-config');
+            __DIR__ . '/../config/schedule-police.php' => config_path('schedule-police.php'),
+        ], 'schedule-police-config');
 
         // Assets
         $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/schedule-control'),
-        ], 'schedule-control-assets');
+            __DIR__.'/../public' => public_path('vendor/schedule-police'),
+        ], 'schedule-police-assets');
     }
 }

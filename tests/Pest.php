@@ -1,6 +1,6 @@
 <?php
 
-use Acdphp\ScheduleControl\Tests\TestCase;
+use Acdphp\SchedulePolice\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(TestCase::class)->in( 'Unit');

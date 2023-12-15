@@ -29,13 +29,13 @@
             </td>
             <td class="text-end">
                 @if($enableExecute && $event->isEventConsoleCommand())
-                    <form class="d-inline-block" method="post" action="{{ route('schedule-control.exec') }}">
+                    <form class="d-inline-block" method="post" action="{{ route('schedule-police.exec') }}">
                         @csrf
                         <input type="hidden" name="command" value="{{ $event->key }}" />
                         <button class="btn btn-outline-primary btn-sm" type="submit">Execute</button>
                     </form>
                 @endif
-                <form class="d-inline-block" method="post" action="{{ route('schedule-control.' . ($event->stoppedEvent ? 'start' : 'stop')) }}">
+                <form class="d-inline-block" method="post" action="{{ route('schedule-police.' . ($event->stoppedEvent ? 'start' : 'stop')) }}">
                     @csrf
                     <input type="hidden" name="key" value="{{ $event->key }}" />
                     <input type="hidden" name="expression" value="{{ $event->event->expression }}" />

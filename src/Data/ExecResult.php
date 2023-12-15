@@ -1,6 +1,6 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Data;
+namespace Acdphp\SchedulePolice\Data;
 
 class ExecResult
 {

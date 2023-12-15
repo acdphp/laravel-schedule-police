@@ -1,8 +1,8 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Data;
+namespace Acdphp\SchedulePolice\Data;
 
-use Acdphp\ScheduleControl\Models\StoppedScheduledEvent;
+use Acdphp\SchedulePolice\Models\StoppedScheduledEvent;
 use Illuminate\Console\Scheduling\Event;
 
 class ScheduledEvent

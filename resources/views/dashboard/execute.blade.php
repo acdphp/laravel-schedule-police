@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('schedule-control.exec') }}">
+<form method="post" action="{{ route('schedule-police.exec') }}">
     @csrf
     <div class="input-group mb-3">
         <label class="input-group-text">php artisan</label>
