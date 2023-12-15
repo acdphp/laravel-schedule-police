@@ -40,7 +40,8 @@ class ScheduleControlService
         app()->make(Kernel::class);
         $schedule = app()->make(Schedule::class);
 
-        return array_map(function (Event $event) {
+        // Map events
+        $events = array_map(function (Event $event) {
             $key = $this->getEventKey($event);
             $stopped = $this->eventStopped($event);
 
@@ -53,6 +54,13 @@ class ScheduleControlService
                 'is_console' => $this->isEventConsoleCommand($event),
             ];
         }, $schedule->events());
+
+        // Sort events by stopped time
+        usort($events, function($a, $b) {
+            return $a->stopped?->at < $b->stopped?->at;
+        });
+
+        return $events;
     }
 
     public function stopScheduleByKey(string $key): void
