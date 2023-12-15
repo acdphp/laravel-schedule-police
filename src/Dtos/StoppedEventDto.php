@@ -9,7 +9,7 @@ class StoppedEventDto
     public function __construct(
         public string $key,
         public Carbon $at,
-        public string $by,
+        public ?string $by = null,
     ) {
     }
 }
