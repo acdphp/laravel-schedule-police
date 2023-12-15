@@ -4,6 +4,7 @@ namespace Acdphp\ScheduleControl\Services;
 
 use Acdphp\ScheduleControl\Console\Kernel as ControlKernel;
 use Acdphp\ScheduleControl\Dtos\ExecResultDto;
+use Acdphp\ScheduleControl\Dtos\StoppedEventDto;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Console\Kernel;
@@ -41,13 +42,16 @@ class ScheduleControlService
 
         return array_map(function (Event $event) {
             $key = $this->getEventKey($event);
+            $stopped = $this->eventStopped($event);
 
             return (object) [
                 'key' => $key,
                 'name' => $this->getEventCommand($event),
                 'description' => $event->description,
                 'expression' => $event->expression,
-                'stopped' => $this->eventStoppedAt($event)?->format('Y-m-d H:i:sO'),
+                'stopped' => $stopped,
+                'stopped_at' => $stopped?->stoppedAt->format('Y-m-d H:i:sO'),
+                'stopped_by' => $stopped?->by,
                 'is_console' => $this->isEventConsoleCommand($event),
             ];
         }, $schedule->events());
@@ -97,7 +101,7 @@ class ScheduleControlService
         );
     }
 
-    public function eventStoppedAt(Event $event): ?Carbon
+    public function eventStopped(Event $event): ?StoppedEventDto
     {
         $stoppedEvents = $this->getStoppedEvents();
         $subjectEvent = json_decode($this->getEventKey($event), false, 512, JSON_THROW_ON_ERROR);
@@ -110,7 +114,11 @@ class ScheduleControlService
                 (! $this->config['separate_by_frequency'] || $sEvent->freq === $subjectEvent->freq);
         });
 
-        return $stoppedEvent ? Carbon::parse($stoppedEvent->created_at) : null;
+        return $stoppedEvent ? new StoppedEventDto(
+            $stoppedEvent->key,
+            Carbon::parse($stoppedEvent->created_at),
+            $stoppedEvent->by,
+        ) : null;
     }
 
     public function getEventKey(Event $event): string

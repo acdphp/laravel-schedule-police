@@ -64,5 +64,12 @@ public function boot(): void
 }
 ```
 
+## Screenshots
+### Events list page
+![events page](./.docs/screenshots/screenshot-events-page.png)
+
+### Execute page
+![execute page](./.docs/screenshots/screenshot-execute-page.png)
+
 ## License
 The MIT License (MIT). Please see [License File](LICENSE) for more information.

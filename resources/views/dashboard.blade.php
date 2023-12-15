@@ -32,6 +32,7 @@
                             <table class="table table-striped w-100">
                                 <tr>
                                     <th>Status</th>
+                                    <th>Stopped</th>
                                     <th>Events</th>
                                     <th></th>
                                 </tr>
@@ -41,9 +42,17 @@
                                             <span class="badge rounded-pill bg-{{ $event->stopped ? 'danger' : 'success' }}">
                                                 {{ $event->stopped ? 'stopped' : 'running' }}
                                             </span>
-                                            <small class="d-block pt-2">
-                                                {!! str_replace(' ', '<br/>', $event->stopped) !!}
-                                            </small>
+                                        </td>
+                                        <td>
+                                            @if ($event->stopped)
+                                                <small>
+                                                    {!! str_replace(' ', '<br/>', $stopped?->at->format('Y-m-d H:i:sO')) !!}
+                                                </small>
+                                                @if ($event->stopped?->by)
+                                                    <small class="d-block">By: {{ $event->stopped->by }}</small>
+                                                @endif
+                                            @endif
+
                                         </td>
                                         <td>
                                             <span class="d-block fw-bolder">{{ $event->name }}</span>
