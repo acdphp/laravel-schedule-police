@@ -14,8 +14,8 @@ class ScheduledTask
     ) {
     }
 
-    public function isEventConsoleCommand(Event $event): bool
+    public function isEventConsoleCommand(): bool
     {
-        return preg_match("/^'.*php.*' 'artisan' /", $event->command);
+        return preg_match("/^'.*php.*' 'artisan' /", $this->event->command);
     }
 }

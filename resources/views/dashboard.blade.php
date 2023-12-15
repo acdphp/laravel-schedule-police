@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('schedule-control::layouts.main')
 
 @section('content')
     <div class="d-flex align-items-start">

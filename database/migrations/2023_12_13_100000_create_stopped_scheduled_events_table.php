@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('key', 500);
             $table->string('expression', 50);
-            $table->timestamp('created_at');
+            $table->timestamps();
             $table->string('by')->nullable();
         });
     }
