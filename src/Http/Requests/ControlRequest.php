@@ -10,6 +10,7 @@ class ControlRequest extends FormRequest
     {
         return [
             'key' => ['required', 'string'],
+            'expression' => ['required', 'string'],
         ];
     }
 }

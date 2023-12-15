@@ -13,10 +13,13 @@ class Schedule extends IlluminateSchedule
      */
     public function dueEvents($app)
     {
+        /**
+         * @var ScheduleControlService $service
+         */
         $service = app(ScheduleControlService::class);
 
         return parent::dueEvents($app)->filter(function (Event $event) use ($service) {
-            return ! $service->eventStoppedAt($event);
+            return ! $service->stoppedEvent($event);
         });
     }
 }

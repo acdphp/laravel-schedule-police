@@ -1,8 +1,8 @@
 <?php
 
-namespace Acdphp\ScheduleControl\Dtos;
+namespace Acdphp\ScheduleControl\Data;
 
-class ExecResultDto
+class ExecResult
 {
     public function __construct(
         public string $message,

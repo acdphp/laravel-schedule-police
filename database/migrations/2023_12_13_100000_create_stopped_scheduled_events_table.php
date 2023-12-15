@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stopped_scheduled_events', function (Blueprint $table) {
+        Schema::create('stopped_scheduled_events', static function (Blueprint $table) {
             $table->id();
-            $table->json('key');
+            $table->string('key', 500);
+            $table->string('expression', 50);
             $table->timestamp('created_at');
             $table->string('by')->nullable();
         });

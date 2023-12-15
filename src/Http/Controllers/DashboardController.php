@@ -5,6 +5,7 @@ namespace Acdphp\ScheduleControl\Http\Controllers;
 use Acdphp\ScheduleControl\Http\Requests\ControlRequest;
 use Acdphp\ScheduleControl\Http\Requests\ExecRequest;
 use Acdphp\ScheduleControl\Services\ScheduleControlService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
@@ -16,27 +17,33 @@ class DashboardController extends Controller
     {
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     public function index(): View
     {
-        return view('schedule-control::dashboard', [
-            'configured' => $this->service->isConfigured(),
-            'events' => $this->service->getScheduledTasks(),
-            'enableExecute' => config('schedule-control.enable_execution'),
-        ]);
+        if ($this->service->isConfigured()) {
+            return view('schedule-control::dashboard', [
+                'tasks' => $this->service->getScheduledTasks(),
+                'enableExecute' => config('schedule-control.enable_execution'),
+            ]);
+        }
+
+        return view('schedule-control::unconfigured');
     }
 
     public function stop(ControlRequest $request): RedirectResponse
     {
-        $this->service->stopScheduleByKey($request->validated('key'));
+        $this->service->stopScheduleByKey(...$request->validated());
 
-        return Redirect::back();
+        return Redirect::route('schedule-control.index');
     }
 
     public function start(ControlRequest $request): RedirectResponse
     {
-        $this->service->startScheduleByKey($request->validated('key'));
+        $this->service->startScheduleByKey(...$request->validated());
 
-        return Redirect::back();
+        return Redirect::route('schedule-control.index');
     }
 
     public function exec(ExecRequest $request): RedirectResponse
@@ -48,7 +55,7 @@ class DashboardController extends Controller
         $command = $request->validated('command');
         $output = $this->service->execCommand($command);
 
-        return Redirect::back()
+        return Redirect::route('schedule-control.index')
             ->withFragment('#v-execute')
             ->with([
                 'command' => $command,
