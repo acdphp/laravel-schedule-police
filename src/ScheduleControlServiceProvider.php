@@ -36,5 +36,10 @@ class ScheduleControlServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/schedule-control.php' => config_path('schedule-control.php'),
         ], 'schedule-control-config');
+
+        // Assets
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/schedule-control'),
+        ], 'schedule-control-assets');
     }
 }

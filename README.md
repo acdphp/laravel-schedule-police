@@ -16,6 +16,11 @@ Use this if you need to:
     ```shell
     php artisan migrate
     ```
+   
+3. Publish assets
+   ```shell
+   php artisan vendor:publish --tag=schedule-control-assets --force
+   ```
 
 3. Update your Console Kernel to extend `Acdphp\ScheduleControl\Console\Kernel` instead of `Illuminate\Foundation\Console\Kernel`.
     ```php
@@ -30,7 +35,7 @@ Use this if you need to:
 ## Config
 You may override the config by publishing it.
 ```shell
-php artisan vendor:publish --provider="Acdphp\ScheduleControl\ScheduleControlServiceProvider"
+php artisan vendor:publish --tag=schedule-control-config
 ```
 
 You may also just define environment variables if you don't need to publish the config.

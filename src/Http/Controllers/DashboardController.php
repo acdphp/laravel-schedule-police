@@ -48,10 +48,12 @@ class DashboardController extends Controller
         $command = $request->validated('command');
         $output = $this->service->execCommand($command);
 
-        return Redirect::back()->with([
-            'command' => $command,
-            'commandOutputIsError' => $output->isError,
-            'commandOutputMessage' => $output->message,
-        ]);
+        return Redirect::back()
+            ->withFragment('#v-execute')
+            ->with([
+                'command' => $command,
+                'commandOutputIsError' => $output->isError,
+                'commandOutputMessage' => $output->message,
+            ]);
     }
 }
