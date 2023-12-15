@@ -22,7 +22,7 @@ Use this if you need to:
    php artisan vendor:publish --tag=schedule-control-assets --force
    ```
 
-3. Update your Console Kernel to extend `Acdphp\ScheduleControl\Console\Kernel` instead of `Illuminate\Foundation\Console\Kernel`.
+4. Update your Console Kernel to extend `Acdphp\ScheduleControl\Console\Kernel` instead of `Illuminate\Foundation\Console\Kernel`.
     ```php
     namespace App\Console;
     
