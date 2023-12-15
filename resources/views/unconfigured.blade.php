@@ -3,11 +3,12 @@
 @section('content')
     <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Not properly configured!</h4>
+        <hr/>
         <p>Make sure to:</p>
-        <hr>
         <ul>
-            <li>extend <i>ControlledConsoleKernel</i> in your <i>\App\Console\Kernel</i>.</li>
-            <li>run migration: <i>php artisan migrate</i>.</li>
+            <li>Run the migration, <strong>php artisan migrate</strong></li>
+            <li>Publish the assets, <strong>php artisan vendor:publish --tag=schedule-police-assets --force</strong></li>
+            <li>Extend <strong>\Acdphp\SchedulePolice\Console\Kernel</strong> in your <strong>\App\Console\Kernel</strong></li>
         </ul>
     </div>
 @endsection

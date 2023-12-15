@@ -31,7 +31,8 @@ class SchedulePoliceService
     {
         return
             is_a('\App\Console\Kernel', ControlKernel::class, true) &&
-            Schema::hasTable('stopped_scheduled_events');
+            Schema::hasTable('stopped_scheduled_events') &&
+            file_exists(public_path('vendor/schedule-police'));
     }
 
     /**
