@@ -1,4 +1,4 @@
-@extends('schedule-control::layouts.main')
+@extends('schedule-control::layouts.default')
 
 @section('content')
     <div class="alert alert-danger" role="alert">

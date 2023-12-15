@@ -64,11 +64,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sort tasks by stopped
+    | Sort events by stopped
     |--------------------------------------------------------------------------
     |
-    | When true, stopped tasks will be sorted to be on top. This is default
-    | to false since it could be confusing to see tasks flying around.
+    | When true, stopped events will be sorted to be on top. This is default
+    | to false since it could be confusing to see events flying around.
     |
     */
     'sort_by_stopped' => false,

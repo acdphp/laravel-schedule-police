@@ -24,7 +24,7 @@ class DashboardController extends Controller
     {
         if ($this->service->isConfigured()) {
             return view('schedule-control::dashboard', [
-                'tasks' => $this->service->getScheduledTasks(),
+                'events' => $this->service->getScheduledEvents(),
                 'enableExecute' => config('schedule-control.enable_execution'),
             ]);
         }

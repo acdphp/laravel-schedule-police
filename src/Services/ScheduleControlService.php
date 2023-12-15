@@ -4,7 +4,7 @@ namespace Acdphp\ScheduleControl\Services;
 
 use Acdphp\ScheduleControl\Console\Kernel as ControlKernel;
 use Acdphp\ScheduleControl\Data\ExecResult;
-use Acdphp\ScheduleControl\Data\ScheduledTask;
+use Acdphp\ScheduleControl\Data\ScheduledEvent;
 use Acdphp\ScheduleControl\Models\StoppedScheduledEvent;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule;
@@ -35,31 +35,31 @@ class ScheduleControlService
     }
 
     /**
-     * @return array|ScheduledTask[]
+     * @return array|ScheduledEvent[]
      * @throws BindingResolutionException
      */
-    public function getScheduledTasks(): array
+    public function getScheduledEvents(): array
     {
         app()->make(Kernel::class);
         $schedule = app()->make(Schedule::class);
 
         // Map events
-        $tasks = array_map(function (Event $event) {
-            return new ScheduledTask(
+        $events = array_map(function (Event $event) {
+            return new ScheduledEvent(
                 key: $this->getEventKey($event),
                 event: $event,
                 stoppedEvent: $this->stoppedEvent($event),
             );
         }, $schedule->events());
 
-        // Sort tasks by stopped time
         if ($this->config['sort_by_stopped']) {
-            usort($tasks, static function($a, $b) {
+            // Sort events by stopped time
+            usort($events, static function($a, $b) {
                 return $a->stoppedEvent?->created_at < $b->stoppedEvent?->created_at;
             });
         }
 
-        return $tasks;
+        return $events;
     }
 
     public function stopScheduleByKey(string $key, string $expression): void

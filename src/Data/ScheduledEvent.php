@@ -5,7 +5,7 @@ namespace Acdphp\ScheduleControl\Data;
 use Acdphp\ScheduleControl\Models\StoppedScheduledEvent;
 use Illuminate\Console\Scheduling\Event;
 
-class ScheduledTask
+class ScheduledEvent
 {
     public function __construct(
         public string $key,
