@@ -74,10 +74,10 @@ class ScheduleControlService
 
     public function startScheduleByKey(string $key, string $expression): void
     {
-        StoppedScheduledEvent::where('key', ['event' => $key])
+        StoppedScheduledEvent::where('key', $key)
             ->when(
                 $this->config['separate_by_frequency'],
-                fn ($q) => $q->whereJsonContains('key', ['expression' => $expression])
+                fn ($q) => $q->where('expression', $expression)
             )
             ->delete();
     }
