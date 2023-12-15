@@ -50,8 +50,6 @@ class ScheduleControlService
                 'description' => $event->description,
                 'expression' => $event->expression,
                 'stopped' => $stopped,
-                'stopped_at' => $stopped?->stoppedAt->format('Y-m-d H:i:sO'),
-                'stopped_by' => $stopped?->by,
                 'is_console' => $this->isEventConsoleCommand($event),
             ];
         }, $schedule->events());
