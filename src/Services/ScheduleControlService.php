@@ -53,9 +53,11 @@ class ScheduleControlService
         }, $schedule->events());
 
         // Sort tasks by stopped time
-        usort($tasks, static function($a, $b) {
-            return $a->stoppedEvent?->created_at < $b->stoppedEvent?->created_at;
-        });
+        if ($this->config('sort_by_stopped')) {
+            usort($tasks, static function($a, $b) {
+                return $a->stoppedEvent?->created_at < $b->stoppedEvent?->created_at;
+            });
+        }
 
         return $tasks;
     }

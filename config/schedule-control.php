@@ -62,6 +62,17 @@ return [
     */
     'causer_key' => 'email',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Sort tasks by stopped
+    |--------------------------------------------------------------------------
+    |
+    | When true, stopped tasks will be sorted to be on top. This is default
+    | to false since it could be confusing to see tasks flying around.
+    |
+    */
+    'sort_by_stopped' => false,
+
     'middleware' => [
         'web',
         RestrictedAccess::class,
