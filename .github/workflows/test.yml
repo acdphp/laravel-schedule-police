@@ -42,5 +42,8 @@ jobs:
       - name: Run pint
         run: vendor/bin/pint --test
 
+      - name: Run pest
+        run: vendor/bin/pest
+
       - name: Run Phpstan
         run: vendor/bin/phpstan --no-progress --debug --memory-limit=1G

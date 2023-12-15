@@ -20,6 +20,7 @@ use Throwable;
 class SchedulePoliceService
 {
     protected static ?Collection $stoppedEventsCache = null;
+
     protected array $config;
 
     public function __construct()
@@ -37,6 +38,7 @@ class SchedulePoliceService
 
     /**
      * @return array|ScheduledEvent[]
+     *
      * @throws BindingResolutionException
      */
     public function getScheduledEvents(): array
@@ -55,15 +57,15 @@ class SchedulePoliceService
 
         if ($this->config['sort_by_stopped']) {
             // Sort events by stopped time
-            usort($events, static function($a, $b) {
-                return $a->stoppedEvent?->created_at < $b->stoppedEvent?->created_at;
+            usort($events, function (ScheduledEvent $a, ScheduledEvent $b) {
+                return (int) ($a->stoppedEvent?->created_at < $b->stoppedEvent?->created_at);
             });
         }
 
         return $events;
     }
 
-    public function stopScheduleByKey(string $key, string $expression): void
+    public function stopSchedule(string $key, string $expression): void
     {
         StoppedScheduledEvent::firstOrCreate([
             'key' => $key,
@@ -73,7 +75,7 @@ class SchedulePoliceService
         ]);
     }
 
-    public function startScheduleByKey(string $key, string $expression): void
+    public function startSchedule(string $key, string $expression): void
     {
         StoppedScheduledEvent::where('key', $key)
             ->when(

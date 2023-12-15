@@ -34,14 +34,14 @@ class DashboardController extends Controller
 
     public function stop(ControlRequest $request): RedirectResponse
     {
-        $this->service->stopScheduleByKey(...$request->validated());
+        $this->service->stopSchedule(...$request->validated());
 
         return Redirect::route('schedule-police.index');
     }
 
     public function start(ControlRequest $request): RedirectResponse
     {
-        $this->service->startScheduleByKey(...$request->validated());
+        $this->service->startSchedule(...$request->validated());
 
         return Redirect::route('schedule-police.index');
     }

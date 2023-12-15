@@ -5,7 +5,7 @@ use Acdphp\SchedulePolice\Http\Middleware\RestrictedAccess;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix(config('schedule-police.url_prefix') . '/schedule-police')
+Route::prefix(config('schedule-police.url_prefix').'/schedule-police')
     ->middleware(config('schedule-police.middleware', [StartSession::class, RestrictedAccess::class]))
     ->controller(DashboardController::class)
     ->group(function () {

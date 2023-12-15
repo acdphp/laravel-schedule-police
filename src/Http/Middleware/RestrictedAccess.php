@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 
 class RestrictedAccess
 {
-    public function handle($request, Closure $next)
+    public function handle(mixed $request, Closure $next): mixed
     {
         if (app()->environment('local')) {
             return $next($request);
