@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Laravel Schedule Control</title>
 
+        <link rel="icon" type="image/x-icon" href="{{ asset('/vendor/schedule-control/favicon.ico') }}">
         <link href="{{ asset('/vendor/schedule-control/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('/vendor/schedule-control/css/app.css') }}" rel="stylesheet">
     </head>
