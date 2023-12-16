@@ -7,3 +7,4 @@
 /.phpstorm.meta.php
 clover.xml
 /build
+composer.lock
