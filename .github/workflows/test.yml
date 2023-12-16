@@ -14,8 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: symfonycorp/security-checker-action@v4
-
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
         with:
@@ -35,6 +33,8 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install -n
+
+      - uses: symfonycorp/security-checker-action@v4
 
       - name: Validate composer.lock
         run: composer validate --strict
