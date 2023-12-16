@@ -3,7 +3,7 @@
 
 Use this if you need to:
 - :white_check_mark: Stop and start scheduled commands without redeploying.
-- :white_check_mark: Execute commands without logging into server console.
+- :white_check_mark: Execute commands without going into server console.
 - :white_check_mark: Keep the visibility, control, and reviewability of the schedule configurations in your codebase.
 
 ## Installation
