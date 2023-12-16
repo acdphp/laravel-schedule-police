@@ -1,0 +1,49 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: ~
+
+jobs:
+  build:
+    name: Test Suite
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          extensions: mbstring, xml, hash, ctype, iconv, curl
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install Composer dependencies
+        run: composer install -n
+
+      - uses: symfonycorp/security-checker-action@v4
+
+      - name: Validate composer.lock
+        run: composer validate --strict
+
+      - name: Run pint
+        run: vendor/bin/pint --test
+
+      - name: Run pest
+        run: vendor/bin/pest
+
+      - name: Run Phpstan
+        run: vendor/bin/phpstan --no-progress --debug --memory-limit=1G

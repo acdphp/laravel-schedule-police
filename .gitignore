@@ -1,0 +1,10 @@
+/.phpunit.cache
+/vendor
+.phpunit.result.cache
+/.fleet
+/.idea
+/.vscode
+/.phpstorm.meta.php
+clover.xml
+/build
+composer.lock
