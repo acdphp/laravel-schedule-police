@@ -19,7 +19,7 @@ use Throwable;
 
 class SchedulePoliceService
 {
-    protected static ?Collection $stoppedEventsCache = null;
+    protected ?Collection $stoppedEventsCache = null;
 
     protected array $config;
 
@@ -111,21 +111,26 @@ class SchedulePoliceService
 
     public function stoppedEvent(Event $event): ?StoppedScheduledEvent
     {
-        if (! static::$stoppedEventsCache) {
-            static::$stoppedEventsCache = StoppedScheduledEvent::all();
+        if (! $this->stoppedEventsCache) {
+            $this->stoppedEventsCache = StoppedScheduledEvent::all();
         }
 
-        return static::$stoppedEventsCache
+        return $this->stoppedEventsCache
             ->where('key', $this->getEventKey($event))
             ->when($this->config['separate_by_frequency'], fn ($q) => $q->where('expression', $event->expression))
             ->first();
     }
 
-    protected function getEventKey(Event $event): string
+    public function getEventKey(Event $event): string
     {
         return Str::of($event->command)
             ->after('artisan\'')
             ->whenEmpty(fn () => Str::of($event->description))
             ->trim();
+    }
+
+    public function setConfig(array $config): void
+    {
+        $this->config = $config;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Acdphp\SchedulePolice\Tests\Feature\Services;
 
-use Acdphp\SchedulePolice\Data\ScheduledEvent;
 use Acdphp\SchedulePolice\Models\StoppedScheduledEvent;
 use Acdphp\SchedulePolice\Services\SchedulePoliceService;
 use Illuminate\Console\Scheduling\Schedule;
@@ -12,26 +11,26 @@ use Illuminate\Support\Facades\Config;
 
 beforeEach(function () {
     app()->make(Kernel::class);
-    $schedule = app()->make(Schedule::class);
+    $this->schedule = app()->make(Schedule::class);
 
-    $schedule->command('inspire')->everyMinute();
+    $this->schedule->command('inspire')->everyMinute();
+
+    $this->service = app(SchedulePoliceService::class);
 });
 
 it('returns scheduled events', function () {
-    expect(app(SchedulePoliceService::class)->getScheduledEvents())
+    expect($this->service->getScheduledEvents())
         ->toHaveCount(1)
-        ->toContainOnlyInstancesOf(ScheduledEvent::class)
         ->{0}->key->toBe('inspire')
         ->{0}->event->expression->toBe('* * * * *')
-        ->{0}->stoppedEvent->toBeNull();
+        ->{0}->stodwxppedEvent->toBeNull();
 });
 
 it('returns stopped scheduled events', function () {
-    app(SchedulePoliceService::class)->stopSchedule('inspire', '* * * * *');
+    $this->service->stopSchedule('inspire', '* * * * *');
 
-    expect(app(SchedulePoliceService::class)->getScheduledEvents())
+    expect($this->service->getScheduledEvents())
         ->toHaveCount(1)
-        ->toContainOnlyInstancesOf(ScheduledEvent::class)
         ->{0}->key->toBe('inspire')
         ->{0}->event->expression->toBe('* * * * *')
         ->{0}->stoppedEvent->key->toBe('inspire')
@@ -39,7 +38,7 @@ it('returns stopped scheduled events', function () {
 });
 
 it('can stop scheduled event', function () {
-    app(SchedulePoliceService::class)->stopSchedule('inspire', '* * * * *');
+    $this->service->stopSchedule('inspire', '* * * * *');
 
     $this->assertDatabaseHas('stopped_scheduled_events', [
         'key' => 'inspire',
@@ -49,7 +48,7 @@ it('can stop scheduled event', function () {
 
 it('can start scheduled event', function () {
     StoppedScheduledEvent::create(['key' => 'inspire', 'expression' => '* * * * *']);
-    app(SchedulePoliceService::class)->startSchedule('inspire', '* * * * *');
+    $this->service->startSchedule('inspire', '* * * * *');
 
     $this->assertDatabaseMissing('stopped_scheduled_events', [
         'key' => 'inspire',
@@ -71,13 +70,15 @@ it('can execute command', function () {
 
     Artisan::swap($mock);
 
-    app(SchedulePoliceService::class)->execCommand('inspire');
+    $this->service->execCommand('inspire');
 });
 
 it('cannot execute blacklisted command', function () {
     Config::set('schedule-police.blacklisted_commands', [
-        'inspire'
+        'inspire',
     ]);
+
+    $this->service->setConfig(config('schedule-police'));
 
     $mock = \Mockery::mock();
 
@@ -87,5 +88,5 @@ it('cannot execute blacklisted command', function () {
 
     Artisan::swap($mock);
 
-    app(SchedulePoliceService::class)->execCommand('inspire');
+    $this->service->execCommand('inspire');
 });

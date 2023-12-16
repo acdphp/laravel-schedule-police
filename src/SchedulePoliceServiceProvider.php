@@ -2,6 +2,7 @@
 
 namespace Acdphp\SchedulePolice;
 
+use Acdphp\SchedulePolice\Tests\Dummy\Command\Test;
 use Illuminate\Support\ServiceProvider;
 
 class SchedulePoliceServiceProvider extends ServiceProvider
@@ -16,6 +17,10 @@ class SchedulePoliceServiceProvider extends ServiceProvider
     {
         $this->load();
         $this->publish();
+
+        $this->commands([
+            Test::class,
+        ]);
     }
 
     private function load(): void
