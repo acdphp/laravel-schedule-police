@@ -6,10 +6,16 @@ Use this if you need to:
 - :white_check_mark: Execute commands without going into server console.
 - :white_check_mark: Keep the visibility, control, and reviewability of the schedule configurations in your codebase.
 
+## Compatiblity Matrix
+
+| <span align="left">Laravel</span> | <span align="left">Schedule Police</span> |
+|:----------------------------------|------------------------------------------:|
+| 8.x ~ 10.x                        |                                       1.x |
+
 ## Installation
 1. Install the package
     ```shell
-    composer require acdphp/laravel-schedule-police
+    composer require acdphp/laravel-schedule-police:^1.0
     ```
 
 2. Run the migration.
