@@ -125,18 +125,14 @@ class SchedulePoliceService
 
     public function getEventKey(Event $event): string
     {
-        $command = $event->command ?? '';
-
         if ($event instanceof CallbackEvent) {
-            $command = 'Closure at: '.$this->getClosureLocation($event);
-        } else if ($event instanceof Event) {
-            $command = Str::of($event->command)
-                ->after('artisan\'')
-                ->whenEmpty(fn () => Str::of($event->description))
-                ->trim();
+            return 'Closure at: '.$this->getClosureLocation($event);
         }
 
-        return $command;
+        return Str::of($event->command)
+            ->after('artisan\'')
+            ->whenEmpty(fn () => Str::of($event->description))
+            ->trim();
     }
 
     public function setConfig(array $config): void
@@ -144,7 +140,7 @@ class SchedulePoliceService
         $this->config = $config;
     }
 
-    private function getClosureLocation(CallbackEvent $event)
+    private function getClosureLocation(CallbackEvent $event): string
     {
         $callback = (new ReflectionClass($event))->getProperty('callback')->getValue($event);
 
@@ -154,7 +150,7 @@ class SchedulePoliceService
             return sprintf(
                 '%s:%s',
                 str_replace(
-                    app()->basePath() . DIRECTORY_SEPARATOR,
+                    app()->basePath().DIRECTORY_SEPARATOR,
                     '',
                     $function->getFileName() ?: ''
                 ),
