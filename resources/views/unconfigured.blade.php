@@ -8,7 +8,6 @@
         <ul>
             <li>Run the migration, <strong>php artisan migrate</strong></li>
             <li>Publish the assets, <strong>php artisan vendor:publish --tag=schedule-police-assets --force</strong></li>
-            <li>Extend <strong>\Acdphp\SchedulePolice\Console\Kernel</strong> in your <strong>\App\Console\Kernel</strong></li>
         </ul>
     </div>
 @endsection
