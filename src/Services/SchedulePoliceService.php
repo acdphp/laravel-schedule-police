@@ -126,4 +126,9 @@ class SchedulePoliceService
             ->whenEmpty(fn () => Str::of($event->description))
             ->trim();
     }
+
+    public function setConfig(array $config): void
+    {
+        $this->config = $config;
+    }
 }

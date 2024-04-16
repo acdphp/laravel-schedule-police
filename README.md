@@ -6,14 +6,12 @@ Use this if you need to:
 - :white_check_mark: Execute commands without going into server console.
 - :white_check_mark: Keep the visibility, control, and reviewability of the schedule configurations in your codebase.
 
-### Compatiblity Matrix
+### Compatibility Matrix
 
 | <span align="left">Laravel</span> | <span align="left">Totem</span> |
 |:----------------------------------|--------------------------------:|
 | 11.x                              |                             2.x |
-| 10.x                              |                             1.x |
-| 9.x                               |                             1.x |
-
+| 8.x ~ 10.x                        |                             1.x |
 
 ## Installation
 1. Install the package

@@ -4,7 +4,6 @@ use Acdphp\SchedulePolice\Console\Scheduling\Schedule;
 use Acdphp\SchedulePolice\Services\SchedulePoliceService;
 use Acdphp\SchedulePolice\Tests\Dummy\Command\Test;
 use Illuminate\Console\Scheduling\Event;
-use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
