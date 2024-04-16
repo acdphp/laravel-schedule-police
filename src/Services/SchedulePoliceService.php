@@ -5,6 +5,8 @@ namespace Acdphp\SchedulePolice\Services;
 use Acdphp\SchedulePolice\Data\ExecResult;
 use Acdphp\SchedulePolice\Data\ScheduledEvent;
 use Acdphp\SchedulePolice\Models\StoppedScheduledEvent;
+use Closure;
+use Illuminate\Console\Scheduling\CallbackEvent;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Console\Kernel;
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use ReflectionClass;
+use ReflectionFunction;
 use Throwable;
 
 class SchedulePoliceService
@@ -121,6 +125,10 @@ class SchedulePoliceService
 
     public function getEventKey(Event $event): string
     {
+        if ($event instanceof CallbackEvent) {
+            return 'Closure at: '.$this->getClosureLocation($event);
+        }
+
         return Str::of($event->command)
             ->after('artisan\'')
             ->whenEmpty(fn () => Str::of($event->description))
@@ -130,5 +138,36 @@ class SchedulePoliceService
     public function setConfig(array $config): void
     {
         $this->config = $config;
+    }
+
+    private function getClosureLocation(CallbackEvent $event): string
+    {
+        $callback = (new ReflectionClass($event))->getProperty('callback')->getValue($event);
+
+        if ($callback instanceof Closure) {
+            $function = new ReflectionFunction($callback);
+
+            return sprintf(
+                '%s:%s',
+                str_replace(
+                    app()->basePath().DIRECTORY_SEPARATOR,
+                    '',
+                    $function->getFileName() ?: ''
+                ),
+                $function->getStartLine()
+            );
+        }
+
+        if (is_string($callback)) {
+            return $callback;
+        }
+
+        if (is_array($callback)) {
+            $className = is_string($callback[0]) ? $callback[0] : $callback[0]::class;
+
+            return sprintf('%s::%s', $className, $callback[1]);
+        }
+
+        return sprintf('%s::__invoke', $callback::class);
     }
 }
