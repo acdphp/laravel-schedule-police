@@ -49,6 +49,7 @@ return [
     */
     'blacklisted_commands' => [
         'migrate:fresh',
+        'migrate:refresh',
     ],
 
     /*

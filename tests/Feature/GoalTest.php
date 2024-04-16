@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 
 beforeEach(function () {
-    app()->make(Kernel::class);
     $this->schedule = app()->make(Schedule::class);
     $this->service = app(SchedulePoliceService::class);
 

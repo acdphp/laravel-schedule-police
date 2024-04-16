@@ -6,6 +6,15 @@ Use this if you need to:
 - :white_check_mark: Execute commands without going into server console.
 - :white_check_mark: Keep the visibility, control, and reviewability of the schedule configurations in your codebase.
 
+### Compatiblity Matrix
+
+| <span align="left">Laravel</span> | <span align="left">Totem</span> |
+|:----------------------------------|--------------------------------:|
+| 11.x                              |                             2.x |
+| 10.x                              |                             1.x |
+| 9.x                               |                             1.x |
+
+
 ## Installation
 1. Install the package
     ```shell
@@ -21,16 +30,6 @@ Use this if you need to:
    ```shell
    php artisan vendor:publish --tag=schedule-police-assets --force
    ```
-
-4. Update your Console Kernel to extend `Acdphp\SchedulePolice\Console\Kernel` instead of `Illuminate\Foundation\Console\Kernel`.
-    ```php
-    namespace App\Console;
-    
-    use Acdphp\SchedulePolice\Console\Kernel as ConsoleKernel;
-    
-    class Kernel extends ConsoleKernel
-    ...
-    ```
    
 ## Config
 You may override the config by publishing it.
