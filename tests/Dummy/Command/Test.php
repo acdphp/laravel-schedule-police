@@ -25,7 +25,6 @@ class Test extends Command
      */
     public function handle()
     {
-        dump('hello');
         $this->info('Test');
     }
 }

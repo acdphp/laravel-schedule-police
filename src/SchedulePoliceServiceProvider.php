@@ -2,7 +2,9 @@
 
 namespace Acdphp\SchedulePolice;
 
+use Acdphp\SchedulePolice\Console\Scheduling\Schedule as ControlledSchedule;
 use Acdphp\SchedulePolice\Tests\Dummy\Command\Test;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 
 class SchedulePoliceServiceProvider extends ServiceProvider
@@ -18,9 +20,15 @@ class SchedulePoliceServiceProvider extends ServiceProvider
         $this->load();
         $this->publish();
 
-        $this->commands([
-            Test::class,
-        ]);
+        $this->app->singleton(Schedule::class, function () {
+            return new ControlledSchedule(config('app.timezone'));
+        });
+
+        if (app()->runningUnitTests()) {
+            $this->commands([
+                Test::class,
+            ]);
+        }
     }
 
     private function load(): void

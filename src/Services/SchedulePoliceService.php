@@ -2,7 +2,6 @@
 
 namespace Acdphp\SchedulePolice\Services;
 
-use Acdphp\SchedulePolice\Console\Kernel as ControlKernel;
 use Acdphp\SchedulePolice\Data\ExecResult;
 use Acdphp\SchedulePolice\Data\ScheduledEvent;
 use Acdphp\SchedulePolice\Models\StoppedScheduledEvent;
@@ -31,7 +30,6 @@ class SchedulePoliceService
     public function isConfigured(): bool
     {
         return
-            is_a('\App\Console\Kernel', ControlKernel::class, true) &&
             Schema::hasTable('stopped_scheduled_events') &&
             file_exists(public_path('vendor/schedule-police'));
     }
@@ -43,7 +41,7 @@ class SchedulePoliceService
      */
     public function getScheduledEvents(): array
     {
-        app()->make(Kernel::class);
+        app()->make(Kernel::class)->bootstrap();
         $schedule = app()->make(Schedule::class);
 
         // Map events
