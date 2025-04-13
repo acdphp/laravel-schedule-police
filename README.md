@@ -10,7 +10,7 @@ Use this if you need to:
 
 | <span align="left">Laravel</span> | <span align="left">Schedule Police</span> |
 |:----------------------------------|------------------------------------------:|
-| 11.x                              |                                       2.x |
+| 11.x ~ 12.x                       |                                       2.x |
 | 8.x ~ 10.x                        |                                       1.x |
 
 ## Installation

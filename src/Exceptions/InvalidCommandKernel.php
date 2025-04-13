@@ -2,6 +2,4 @@
 
 namespace Acdphp\SchedulePolice\Exceptions;
 
-class InvalidCommandKernel extends \Exception
-{
-}
+class InvalidCommandKernel extends \Exception {}

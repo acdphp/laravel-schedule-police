@@ -12,16 +12,16 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.0"
+        "laravel/framework": "^11.0|^12.0"
     },
     "require-dev": {
-        "laravel/pint": "^1.15",
-        "phpstan/phpstan": "^1.10",
-        "larastan/larastan": "^2.9",
+        "laravel/pint": "^1.22",
+        "phpstan/phpstan": "^1.12",
+        "larastan/larastan": "^2.10",
         "ekino/phpstan-banned-code": "^1.0",
-        "orchestra/testbench": "^9.0",
-        "pestphp/pest": "^2.34",
-        "pestphp/pest-plugin-laravel": "^2.3"
+        "orchestra/testbench": "^9.13",
+        "pestphp/pest": "^2.36",
+        "pestphp/pest-plugin-laravel": "^2.4"
     },
     "autoload": {
         "psr-4": {

@@ -7,6 +7,5 @@ class ExecResult
     public function __construct(
         public string $message,
         public bool $isError,
-    ) {
-    }
+    ) {}
 }
