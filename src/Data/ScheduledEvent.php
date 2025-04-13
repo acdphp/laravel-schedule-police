@@ -11,8 +11,7 @@ class ScheduledEvent
         public string $key,
         public Event $event,
         public ?StoppedScheduledEvent $stoppedEvent = null,
-    ) {
-    }
+    ) {}
 
     public function isEventConsoleCommand(): bool
     {

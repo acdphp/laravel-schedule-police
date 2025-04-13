@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
-    public function __construct(protected SchedulePoliceService $service)
-    {
-    }
+    public function __construct(protected SchedulePoliceService $service) {}
 
     /**
      * @throws BindingResolutionException
