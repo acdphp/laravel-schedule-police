@@ -1,0 +1,60 @@
+x-test-service: &test-service
+  working_dir: /app
+  volumes:
+    - .:/app
+  entrypoint: ["bash", "-c"]
+  command: >
+    "apt-get update && apt-get install -y git unzip libzip-dev zip &&
+     docker-php-ext-install zip &&
+     php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" &&
+     php composer-setup.php --install-dir=/usr/local/bin --filename=composer &&
+     rm composer-setup.php &&
+     rm -f composer.lock &&
+     composer update --prefer-stable --no-interaction &&
+     rm -f composer.lock &&
+     composer test"
+
+services:
+  lint-fix:
+    <<: *test-service
+    image: php:8.4-cli
+    command: >
+      "apt-get update && apt-get install -y git unzip libzip-dev zip &&
+       docker-php-ext-install zip &&
+       php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" &&
+       php composer-setup.php --install-dir=/usr/local/bin --filename=composer &&
+       rm composer-setup.php &&
+       rm -rf vendor &&
+       rm -f composer.lock &&
+       composer update --prefer-stable --no-interaction &&
+       composer lint-fix"
+
+  lint:
+    <<: *test-service
+    image: php:8.4-cli
+    command: >
+      "apt-get update && apt-get install -y git unzip libzip-dev zip &&
+       docker-php-ext-install zip &&
+       php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" &&
+       php composer-setup.php --install-dir=/usr/local/bin --filename=composer &&
+       rm composer-setup.php &&
+       rm -rf vendor &&
+       rm -f composer.lock &&
+       composer update --prefer-stable --no-interaction &&
+       composer lint"
+
+  test-php82:
+    <<: *test-service
+    image: php:8.2-cli
+
+  test-php83:
+    <<: *test-service
+    image: php:8.3-cli
+
+  test-php84:
+    <<: *test-service
+    image: php:8.4-cli
+
+  test-php85:
+    <<: *test-service
+    image: php:8.5-cli

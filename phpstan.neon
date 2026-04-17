@@ -7,9 +7,10 @@ parameters:
     paths:
         - src
     level: 6
-    checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: false
-    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
     banned_code:
         nodes:
             - { type: Stmt_Echo, functions: null }

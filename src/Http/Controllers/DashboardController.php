@@ -21,12 +21,14 @@ class DashboardController extends Controller
     public function index(): View
     {
         if ($this->service->isConfigured()) {
+            /** @phpstan-ignore argument.type (Complaining about view-string) */
             return view('schedule-police::dashboard', [
                 'events' => $this->service->getScheduledEvents(),
                 'enableExecute' => config('schedule-police.enable_execution'),
             ]);
         }
 
+        /** @phpstan-ignore argument.type (Complaining about view-string) */
         return view('schedule-police::unconfigured');
     }
 

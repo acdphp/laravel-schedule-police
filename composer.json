@@ -12,16 +12,16 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.0|^12.0"
+        "laravel/framework": "^11.0|^12.0|^13.0"
     },
     "require-dev": {
         "laravel/pint": "^1.22",
-        "phpstan/phpstan": "^1.12",
-        "larastan/larastan": "^2.10",
-        "ekino/phpstan-banned-code": "^1.0",
-        "orchestra/testbench": "^9.13",
-        "pestphp/pest": "^2.36",
-        "pestphp/pest-plugin-laravel": "^2.4"
+        "phpstan/phpstan": "^1.10 || ^2.0",
+        "larastan/larastan": "^2.0 || ^3.0 ",
+        "ekino/phpstan-banned-code": "^1.0 || ^2.0 || ^3.0",
+        "orchestra/testbench": "^9.0 || ^10.0",
+        "pestphp/pest": "^2.4 || ^3.0 || ^4.0",
+        "pestphp/pest-plugin-laravel": "^2.4 || ^3.0 || ^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -40,5 +40,26 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@prepare"
+        ],
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint-fix": [
+            "@php vendor/bin/pint"
+        ],
+        "lint": [
+            "@php vendor/bin/pint --test --parallel",
+            "@php vendor/bin/phpstan analyse -n --memory-limit=1G"
+        ],
+        "test": [
+            "@php vendor/bin/pest"
+        ]
     }
 }
