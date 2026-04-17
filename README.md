@@ -10,7 +10,7 @@ Use this if you need to:
 
 | <span align="left">Laravel</span> | <span align="left">Schedule Police</span> |
 |:----------------------------------|------------------------------------------:|
-| 11.x ~ 12.x                       |                                       2.x |
+| 11.x ~ 13.x                       |                                       2.x |
 | 8.x ~ 10.x                        |                                       1.x |
 
 ## Installation
@@ -67,6 +67,34 @@ public function boot(): void
 
 ### Execute page
 ![execute page](./.docs/screenshots/screenshot-execute-page.png)
+
+---
+
+## Testing
+```sh
+composer test
+
+# with docker-compose
+docker-compose run --rm test-php84
+```
+
+## Linting and static analysis
+```sh
+composer lint
+
+# with docker-compose
+docker-compose run --rm lint
+```
+
+## Lint Fix
+```sh
+composer lint-fix
+
+# with docker-compose
+docker-compose run --rm lint-fix
+```
+
+---
 
 ## License
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
